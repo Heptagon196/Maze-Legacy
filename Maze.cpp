@@ -61,13 +61,13 @@ int LoadMap()
 	locaz=1;
 	char DefaultMap[255];
 	char DefaultMap2[255];
-	fp=fopen("Settings\\Settings.txt","r");
+	fp=fopen("Settings/Settings.txt","r");
 	fscanf(fp,"DefaultMap=%s\n",DefaultMap2);
 	fclose(fp);
 	gotoxy(7,4);
 	color(Hblue,Hwhite);
 	puts("★");
-	sprintf(DefaultMap,"%s\\Main.DMap",DefaultMap2);
+	sprintf(DefaultMap,"%s/Main.DMap",DefaultMap2);
 	fp=fopen(DefaultMap,"r");
 	int x,y,z,w,d,i,j;
 	fscanf(fp,"%d\n",&w);

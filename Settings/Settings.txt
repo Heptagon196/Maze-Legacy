@@ -1,1 +1,1 @@
-DefaultMap=Maps\Default
+DefaultMap=Maps/Default

@@ -10,8 +10,6 @@ int PutMap(int x,int y,int z);
 int main()
 {
 	HideCursor();
-	system("color F0");
-	system("mode con cols=80 lines=25");
 	LoadMap();
 	int a;
 	gotoxy(79,20);
@@ -59,13 +57,13 @@ int LoadMap()
 	char DefaultMap[255];
 	char DefaultMap2[255];
 
-	fp=fopen("Settings\\Settings.txt","r");
+	fp=fopen("Settings/Settings.txt","r");
 
 	fscanf(fp,"DefaultMap=%s\n",DefaultMap2);
 
 	fclose(fp);
 
-	sprintf(DefaultMap,"%s\\Main.DMap",DefaultMap2);
+	sprintf(DefaultMap,"%s//Main.DMap",DefaultMap2);
 
 	fp=fopen(DefaultMap,"r");
 
