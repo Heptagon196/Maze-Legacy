@@ -1,3 +1,3 @@
 @echo off
-g++ Editor.cpp -oEditor
-g++ Maze.cpp -oMaze
+g++ Editor.cpp -oEditor -DWINDOWS
+g++ Maze.cpp -oMaze -DWINDOWS
