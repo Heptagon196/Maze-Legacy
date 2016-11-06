@@ -23,6 +23,8 @@ int main()
 		backupz=locaz;
 		mark=0;
 		b=getch();
+        if (b=='q')
+            break;
 		if (b=='w')
 			locay=(locay==1)?1:locay-(mark=1);
 		if (b=='s')
@@ -66,7 +68,7 @@ int LoadMap()
 	fclose(fp);
 	gotoxy(7,4);
 	color(Hblue,Hwhite);
-	puts("★");
+	puts("★ ");
 	sprintf(DefaultMap,"%s/Main.DMap",DefaultMap2);
 	fp=fopen(DefaultMap,"r");
 	int x,y,z,w,d,i,j;
@@ -78,31 +80,33 @@ int LoadMap()
 		{
 			fscanf(fp,"%d %d %d\n",&x,&y,&z);
 			Map[x][y][j][0]=1;
-			Map[x][y][j][1]=z;
+			Map[x][y][j][1]=Windows2Linux(z);
 		}
 		fscanf(fp,"%d\n",&d);
 		for (i=1;i<=d;i++)
 		{
 			fscanf(fp,"%d %d %d\n",&x,&y,&z);
 			Map[x][y][j][0]=2;
-			Map[x][y][j][1]=z;
+			Map[x][y][j][1]=Windows2Linux(z);
 		}
 		fscanf(fp,"%d\n",&d);
 		for (i=1;i<=d;i++)
 		{
 			fscanf(fp,"%d %d %d\n",&x,&y,&z);
 			Map[x][y][j][0]=3;
-			Map[x][y][j][1]=z;
+			Map[x][y][j][1]=Windows2Linux(z);
 		}
 	}
-	//fclose(fp);
-	//fp=fopen("Debug_Map.log","w");
-	//for (y=1;y<=20;y++)
-	//{
-	//	for (x=1;x<=40;x++)
-	//		fprintf(fp,"%d ",Map[x][y][1][0]);
-	//	fprintf(fp,"\n");
-	//}
+#ifdef DEBUG
+	fclose(fp);
+	fp=fopen("Debug_Map.log","w");
+	for (y=1;y<=20;y++)
+	{
+		for (x=1;x<=40;x++)
+			fprintf(fp,"%d ",Map[x][y][1][0]);
+		fprintf(fp,"\n");
+	}
+#endif
 	fclose(fp);
 	return 0;
 }
@@ -112,6 +116,7 @@ int Event()
 	system("clear");
 	printf("你走出了迷宫。");
 	getch();
+    UnHideCursor();
 	return 0;
 }
 
@@ -121,7 +126,7 @@ int Refresh()
 	for (x=locax-3;x<=locax+3;x++)
 	for (y=locay-3;y<=locay+3;y++)
 	{
-		if ((x-locax==0)&&(y-locay==0))
+		if ((x==locax)&&(y==locay))
 			continue;
 		gotoxy((x-locax+4)*2-1,y-locay+4);
 		if ((x<1)||(x>40)||(y<1)||(y>20))
@@ -145,13 +150,14 @@ int Refresh()
 		if (Map[x][y][locaz][0]==3)
 		{
 			color(Map[x][y][locaz][1],Hwhite);
-			puts("●");
+			puts("➜ ");
 		}
 		else
 		{
 			color(Hwhite,Hwhite);
 			puts("  ");
 		}
+        color(Hblack,Hblue);
 	}
 	return 0;
 }
