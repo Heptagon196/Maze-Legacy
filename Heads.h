@@ -6,6 +6,6 @@
 #ifdef LINUX
 #include "Conio+.h"
 #endif
-#ifdef WINDOWS
-#include "conio2.h"
+#ifndef LINUX
+#include "Conio+_Windows.h"
 #endif

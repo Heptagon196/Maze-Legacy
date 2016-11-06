@@ -113,7 +113,7 @@ int LoadMap()
 
 int Event()
 {
-	system("clear");
+    Clear();
 	printf("你走出了迷宫。");
 	getch();
     UnHideCursor();

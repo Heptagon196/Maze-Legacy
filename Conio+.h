@@ -20,6 +20,7 @@
 #define yellow 3
 #define white 7
 
+#define Clear() system("clear")
 const int w2l[]={0,4,6,2,1,5,3,7};
 
 inline int Windows2Linux(int c)

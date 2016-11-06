@@ -4,7 +4,7 @@
 #include <time.h>
 
 /*定义clrscr清屏语句*/
-#define clrscr() system("cls")
+#define Clear() system("cls")
 /*color常量定义*/
 #define black 0
 #define blue 1
@@ -23,6 +23,8 @@
 #define Hyellow 14
 #define Hwhite 15
 
+#define Linux2Windows(x) (x)
+#define Windows2Linux(x) (x)
 #define on_(x,y) (x+16*y)
 #define COLOR_ERROR -32767
 /*附加:暂停程序*/
@@ -32,10 +34,10 @@
 WORD TcColor=white,TbColor=black;
 /*gotoxy,wherex,wherey语句定义*/
 void gotoxy(int x,int y)
-{ 
-	COORD c; 
-	c.X=x-1; 
-	c.Y=y-1; 
+{
+	COORD c;
+	c.X=x-1;
+	c.Y=y-1;
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE),c);
 }
 
@@ -48,25 +50,25 @@ int wherex()
 }
 
 
-int wherey()  
-{  
-	CONSOLE_SCREEN_BUFFER_INFO pBuffer;  
-	GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE),&pBuffer);  
-	return (pBuffer.dwCursorPosition.Y+1);  
+int wherey()
+{
+	CONSOLE_SCREEN_BUFFER_INFO pBuffer;
+	GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE),&pBuffer);
+	return (pBuffer.dwCursorPosition.Y+1);
 }
 
 /*隐藏光标*/
-void HideCursor() 
-{ 
-	CONSOLE_CURSOR_INFO cursor_info = {1, 0};  
-	SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE),&cursor_info); 
-} 
+void HideCursor()
+{
+	CONSOLE_CURSOR_INFO cursor_info = {1, 0};
+	SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE),&cursor_info);
+}
 /*显示光标*/
-void UnHideCursor() 
-{ 
-	CONSOLE_CURSOR_INFO cursor_info = {1, 25};  
-	SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE),&cursor_info); 
-} 
+void UnHideCursor()
+{
+	CONSOLE_CURSOR_INFO cursor_info = {1, 25};
+	SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE),&cursor_info);
+}
 /*改变颜色
 color(WORD a,WORD b);字为颜色a,背景为颜色b
 textcolor(WORD a);字为颜色a
